@@ -52,76 +52,72 @@ const get_file_name = pathToFile => {
  * @param {Array} parts: list of folder names
  * @param {String} file: file name
  */
-const makeTree = function(parts, file) {
-  const obj = {};
+const makeTree = function(tree, parts, file) {
+  const obj = Object.assign({}, tree) || {};
 
   if (parts[0]) {
-    if (!obj[parts[0]]) {
+    if (!tree[parts[0]]) {
       obj[parts[0]] = {
         name: parts[0],
         contents: {}
       };
     }
     if (!parts[1] && file) {
-      const contents = Object.assign(obj.parts[0].contents, {
+      const contents = Object.assign(obj[parts[0]].contents, {
         [file]: {
           name: file
         }
       });
 
-      obj.parts[0].contents = contents;
+      obj[parts[0]].contents = contents;
     }
   }
 
   if (parts[1]) {
-    obj[parts[0]].contents[parts[1]] = {
-      name: parts[1],
-      contents: {}
-    };
-
-    if (!parts[2] && file) {
-      obj[parts[0]].contents[parts[1]].contents = {
-        [file]: {
-          name: file
+    if (!tree[parts[0]]) {
+      return parts.join("/") + ": no such file or directory";
+    } else {
+      obj[parts[0]].contents = Object.assign(obj[parts[0]].contents, {
+        [parts[1]]: {
+          name: parts[1],
+          contents:
+            file && !parts[2]
+              ? {
+                  [file]: {
+                    name: file
+                  }
+                }
+              : {}
         }
-      };
+      });
     }
   }
 
-  if (parts[2] && file) {
-    obj[parts[0]].contents[parts[1]].contents[parts[2]] = {
-      name: parts[2],
-      contents: {}
-    };
-
-    if (!parts[3] && file) {
-      obj[parts[0]].contents[parts[1]].contents[parts[2]].contents = {
-        [file]: {
-          name: file
+  if (parts[2]) {
+    if (!tree[parts[0]] && !tree[parts[0]].contents[parts[1]]) {
+      return parts.join("/") + ": no such file or directory";
+    } else {
+      obj[parts[0]].contents[parts[1]].contents = Object.assign(
+        obj.parts[0].contents[parts[1]].contents,
+        {
+          [parts[2]]: {
+            name: parts[2],
+            contents:
+              file && !parts[3]
+                ? {
+                    [file]: {
+                      name: file
+                    }
+                  }
+                : {}
+          }
         }
-      };
+      );
     }
   }
 
   if (parts[3]) {
-    obj[parts[0]].contents[parts[1]].contents[parts[2]].contents[parts[3]] = {
-      name: parts[3],
-      contents: {}
-    };
-
-    if (!parts[4] && file) {
-      obj[parts[0]].contents[parts[1]].contents[parts[2]].contents[
-        parts[3]
-      ].contents = {
-        [file]: {
-          name: file
-        }
-      };
-    }
-  }
-
-  if (parts[4]) {
-    throw Error("You can only create folders up to 4 levels");
+    return parts.join("/") + ": no such file or directory";
   }
 
   return obj;
