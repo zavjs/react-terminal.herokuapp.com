@@ -1,0 +1,10 @@
+{
+  "name": "terminal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "zavjs",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^23.5.0"
+  }
+}
