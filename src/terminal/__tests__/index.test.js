@@ -1,8 +1,21 @@
 const terminal = require("../");
 
-describe("basic commands", () => {
-  it("should create the proper file and file path with touch", () => {
+describe("touch command", () => {
+  it("should not allow files to be created under unexisting folders", () => {
     const initial_folder_tree = {};
+    const final = "abc/index.js: no such file or directory";
+
+    const unexisting = terminal(initial_folder_tree).touch("./abc/index.js");
+    expect(unexisting).toEqual(final);
+  });
+
+  it("should create the proper file and file path with touch", () => {
+    const initial_folder_tree = {
+      src: {
+        name: "src",
+        contents: {}
+      }
+    };
     const final_folder_tree = {
       src: {
         name: "src",

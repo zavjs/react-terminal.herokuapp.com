@@ -4,7 +4,7 @@ const terminal = tree => {
   const touch = function(fileName) {
     const parts = terminal_utils.get_file_path(fileName);
     const file = terminal_utils.get_file_name(fileName);
-    const updatedTree = terminal_utils.makeTree(tree, parts, file);
+    const updatedTree = terminal_utils.makeFile(tree, parts, file);
     return updatedTree;
   };
 

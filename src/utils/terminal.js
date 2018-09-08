@@ -47,6 +47,83 @@ const get_file_name = pathToFile => {
   return path_resolve(parts);
 };
 
+/** makeFile já cumpre sua função:
+ * criar aquivo na ponta, e apenas se todas
+ * as pastas-pai já existirem
+ */
+const makeFile = function(tree, parts, file) {
+  const obj = Object.assign({}, tree) || {};
+  const fullPath = parts.concat(file).join("/");
+
+  if (parts[0]) {
+    if (!tree[parts[0]]) {
+      return fullPath + ": no such file or directory";
+    } else if (!tree[parts[1]]) {
+      obj[parts[0]].contents = Object.assign(obj[parts[0]].contents, {
+        [file]: {
+          name: file
+        }
+      });
+    }
+  }
+
+  if (parts[1]) {
+    if (!tree[parts[1]]) {
+      return fullPath + ": no such file or directory";
+    } else if (!tree[parts[2]]) {
+      obj[parts[0]].contents[parts[1]].contents = Object.assign(
+        obj[parts[0]].contents[parts[1]].contents,
+        {
+          [file]: {
+            name: file
+          }
+        }
+      );
+    }
+  }
+
+  if (parts[2]) {
+    if (!tree[parts[2]]) {
+      return fullPath + ": no such file or directory";
+    } else if (!tree[parts[3]]) {
+      obj[parts[0]].contents[parts[1]].contents[
+        parts[2]
+      ].contents = Object.assign(
+        obj[parts[0]].contents[parts[1]].contents[parts[2]].contents,
+        {
+          [file]: {
+            name: file
+          }
+        }
+      );
+    }
+  }
+
+  if (parts[3]) {
+    if (!tree[parts[3]]) {
+      return fullPath + ": no such file or directory";
+    } else if (!tree[parts[4]]) {
+      obj[parts[0]].contents[parts[1]].contents[parts[2]].contents[
+        parts[3]
+      ].contents = Object.assign(
+        obj[parts[0]].contents[parts[1]].contents[parts[2]].contents[parts[3]]
+          .contents,
+        {
+          [file]: {
+            name: file
+          }
+        }
+      );
+    }
+  }
+
+  if (parts[4]) {
+    return parts.join("/") + ": max depth 4 levels only";
+  }
+
+  return obj;
+};
+
 /**
  * Creates object tree from path string
  * @param {Array} parts: list of folder names
@@ -55,22 +132,11 @@ const get_file_name = pathToFile => {
 const makeTree = function(tree, parts, file) {
   const obj = Object.assign({}, tree) || {};
 
-  if (parts[0]) {
-    if (!tree[parts[0]]) {
-      obj[parts[0]] = {
-        name: parts[0],
-        contents: {}
-      };
-    }
-    if (!parts[1] && file) {
-      const contents = Object.assign(obj[parts[0]].contents, {
-        [file]: {
-          name: file
-        }
-      });
-
-      obj[parts[0]].contents = contents;
-    }
+  if (parts[0] && !tree[parts[0]]) {
+    obj[parts[0]] = {
+      name: parts[0],
+      contents: {}
+    };
   }
 
   if (parts[1]) {
@@ -80,14 +146,7 @@ const makeTree = function(tree, parts, file) {
       obj[parts[0]].contents = Object.assign(obj[parts[0]].contents, {
         [parts[1]]: {
           name: parts[1],
-          contents:
-            file && !parts[2]
-              ? {
-                  [file]: {
-                    name: file
-                  }
-                }
-              : {}
+          contents: {}
         }
       });
     }
@@ -102,14 +161,7 @@ const makeTree = function(tree, parts, file) {
         {
           [parts[2]]: {
             name: parts[2],
-            contents:
-              file && !parts[3]
-                ? {
-                    [file]: {
-                      name: file
-                    }
-                  }
-                : {}
+            contents: {}
           }
         }
       );
@@ -127,5 +179,6 @@ module.exports = {
   get_file_path,
   get_file_name,
   get_contents_list,
+  makeFile,
   makeTree
 };

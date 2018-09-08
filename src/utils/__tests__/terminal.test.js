@@ -8,7 +8,7 @@ describe("terminal utils", () => {
     expect(terminal_utils.get_file_path(initial)).toEqual(final);
   });
 
-  it("it should return the file path from a path string that begins with a dot", () => {
+  it("it should return the file path from a path string that begins without a dot", () => {
     const initial = "/dist/src/styles/index.js";
     const final = ["dist", "src", "styles"];
 
@@ -39,7 +39,7 @@ describe("terminal makeTree functionality", () => {
     expect(terminal_utils.makeTree(initial, input)).toEqual(final);
   });
 
-  it("should allow to create one folder at a time", () => {
+  it("should allow to create one folder at the time", () => {
     const initial = {};
     const input = ["dist"];
     const final = {
