@@ -28,4 +28,11 @@ describe("terminal utils", () => {
 
     expect(terminal_utils.get_file_name(initial)).toEqual(final);
   });
+
+  it("should return an array of file names from a path string, if multiple files", () => {
+    const initial = "./dist/src/styles/{index.js,index.html}";
+    const final = ["index.js", "index.html"];
+
+    expect(terminal_utils.get_file_name(initial)).toEqual(final);
+  });
 });

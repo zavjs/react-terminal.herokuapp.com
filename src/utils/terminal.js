@@ -43,11 +43,31 @@ const get_file_path = pathToFile => {
 /**
  * Returns the file name from a path string
  * @param {String} pathToFile: path to file
- * @returns {Array} list of folder parts
+ * @returns {String|Array} file name or list of file names
  */
 const get_file_name = pathToFile => {
-  const parts = pathToFile.split("/").slice(-1)[0];
-  return path_resolve(parts);
+  const fileName = pathToFile.split("/").slice(-1)[0];
+  return resolveFileName(fileName);
+};
+
+const resolveFileName = fileName => {
+  const multipleFileSyntax = fileName.startsWith("{") && fileName.endsWith("}");
+  const strippedBraces = fileName.slice(1, -1);
+  const files = strippedBraces.split(",");
+  const multipleFiles = files.length;
+
+  // se houver a síntaxe de multiple files {}
+  if (multipleFileSyntax) {
+    // se houver multiple files {index.js, }
+    if (multipleFiles) {
+      return files;
+    } else {
+      // se não {index.js}
+      return strippedBraces;
+    }
+  } else {
+    return fileName;
+  }
 };
 
 module.exports = {
