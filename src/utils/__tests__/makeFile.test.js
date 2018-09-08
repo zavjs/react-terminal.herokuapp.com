@@ -27,8 +27,4 @@ describe("terminal makeFile functionality", () => {
 
     expect(makeFile(initial, ["src", "dist"], "my_file.js")).toEqual(final);
   });
-
-  // it('should be able to create multiple siblings at once', () => {
-
-  // })
 });
