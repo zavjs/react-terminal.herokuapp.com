@@ -29,26 +29,3 @@ describe("terminal utils", () => {
     expect(terminal_utils.get_file_name(initial)).toEqual(final);
   });
 });
-
-describe("terminal makeTree functionality", () => {
-  it("should not allow to create multiple folder levels at once", () => {
-    const initial = {};
-    const input = ["dist", "src"];
-    const final = "dist/src: no such file or directory";
-
-    expect(terminal_utils.makeTree(initial, input)).toEqual(final);
-  });
-
-  it("should allow to create one folder at the time", () => {
-    const initial = {};
-    const input = ["dist"];
-    const final = {
-      dist: {
-        name: "dist",
-        contents: {}
-      }
-    };
-
-    expect(terminal_utils.makeTree(initial, input)).toEqual(final);
-  });
-});
