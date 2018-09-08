@@ -56,18 +56,15 @@ const resolveFileName = fileName => {
   const files = strippedBraces.split(",");
   const multipleFiles = files.length;
 
-  // se houver a síntaxe de multiple files {}
   if (multipleFileSyntax) {
-    // se houver multiple files {index.js, }
     if (multipleFiles) {
       return files;
     } else {
-      // se não {index.js}
       return strippedBraces;
     }
-  } else {
-    return fileName;
   }
+
+  return fileName;
 };
 
 module.exports = {
