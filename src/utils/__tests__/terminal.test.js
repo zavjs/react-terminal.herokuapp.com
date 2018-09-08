@@ -35,4 +35,41 @@ describe("terminal utils", () => {
 
     expect(terminal_utils.get_file_name(initial)).toEqual(final);
   });
+
+  it("should create multiple files under the same existing folder", () => {
+    const initial = {};
+    const input = ["index.html", "index.js"];
+    const final = {
+      "index.html": {
+        name: "index.html"
+      },
+      "index.js": {
+        name: "index.js"
+      }
+    };
+
+    expect(terminal_utils.create_files(initial, input)).toEqual(final);
+  });
+
+  it("should create multiple files and preserve the already existing ones", () => {
+    const initial = {
+      "index.css": {
+        name: "index.css"
+      }
+    };
+    const input = ["index.html", "index.js"];
+    const final = {
+      "index.css": {
+        name: "index.css"
+      },
+      "index.html": {
+        name: "index.html"
+      },
+      "index.js": {
+        name: "index.js"
+      }
+    };
+
+    expect(terminal_utils.create_files(initial, input)).toEqual(final);
+  });
 });

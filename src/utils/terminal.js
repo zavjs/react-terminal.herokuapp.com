@@ -67,10 +67,21 @@ const resolveFileName = fileName => {
   return fileName;
 };
 
+const create_files = (source, filesList) => {
+  return filesList.reduce((acc, curr) => {
+    return Object.assign({}, acc, {
+      [curr]: {
+        name: curr
+      }
+    });
+  }, source);
+};
+
 module.exports = {
   get_file_path,
   get_file_name,
   get_contents_list,
+  create_files,
   makeFile,
   makeTree
 };

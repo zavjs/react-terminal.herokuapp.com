@@ -99,7 +99,7 @@ describe("touch command", () => {
       }
     };
 
-    // const updated = terminal(initial).touch('./src/{index.js,index.html}');
-    // expect(updated).toEqual(final);
+    const updated = terminal(initial).touch("./src/{index.js,index.html}");
+    expect(updated).toEqual(final);
   });
 });

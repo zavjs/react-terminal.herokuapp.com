@@ -50,6 +50,8 @@ describe("terminal makeFile functionality", () => {
       }
     };
 
-    // expect(makeFile(initial, ["src"], "{index.js,index.html}")).toEqual(final);
+    expect(makeFile(initial, ["src"], ["index.js", "index.html"])).toEqual(
+      final
+    );
   });
 });

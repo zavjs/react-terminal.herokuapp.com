@@ -1,16 +1,23 @@
+const create_files = (source, filesList) => {
+  return filesList.reduce((acc, curr) => {
+    return Object.assign({}, acc, {
+      [curr]: {
+        name: curr
+      }
+    });
+  }, source);
+};
+
 const makeFile = function(tree, parts, file) {
   const obj = Object.assign({}, tree) || {};
   const fullPath = parts.concat(file).join("/");
+  const list = Array.isArray(file) ? file : [].concat(file);
 
   if (parts[0]) {
     if (!tree[parts[0]]) {
       return fullPath + ": no such file or directory";
     } else if (!tree[parts[1]]) {
-      obj[parts[0]].contents = Object.assign(obj[parts[0]].contents, {
-        [file]: {
-          name: file
-        }
-      });
+      obj[parts[0]].contents = create_files(obj[parts[0]].contents, list);
     }
   }
 
@@ -18,13 +25,9 @@ const makeFile = function(tree, parts, file) {
     if (!tree[parts[1]]) {
       return fullPath + ": no such file or directory";
     } else if (!tree[parts[2]]) {
-      obj[parts[0]].contents[parts[1]].contents = Object.assign(
+      obj[parts[0]].contents[parts[1]].contents = create_files(
         obj[parts[0]].contents[parts[1]].contents,
-        {
-          [file]: {
-            name: file
-          }
-        }
+        list
       );
     }
   }
@@ -35,13 +38,9 @@ const makeFile = function(tree, parts, file) {
     } else if (!tree[parts[3]]) {
       obj[parts[0]].contents[parts[1]].contents[
         parts[2]
-      ].contents = Object.assign(
+      ].contents = create_files(
         obj[parts[0]].contents[parts[1]].contents[parts[2]].contents,
-        {
-          [file]: {
-            name: file
-          }
-        }
+        list
       );
     }
   }
@@ -52,14 +51,9 @@ const makeFile = function(tree, parts, file) {
     } else if (!tree[parts[4]]) {
       obj[parts[0]].contents[parts[1]].contents[parts[2]].contents[
         parts[3]
-      ].contents = Object.assign(
-        obj[parts[0]].contents[parts[1]].contents[parts[2]].contents[parts[3]]
-          .contents,
-        {
-          [file]: {
-            name: file
-          }
-        }
+      ].contents = create_files(
+        obj[parts[0]].contents[parts[1]].contents[parts[2]].contents[parts[3]],
+        list
       );
     }
   }
