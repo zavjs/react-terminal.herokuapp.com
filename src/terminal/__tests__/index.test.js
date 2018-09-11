@@ -102,4 +102,30 @@ describe("touch command", () => {
     const updated = terminal(initial).touch("./src/{index.js,index.html}");
     expect(updated).toEqual(final);
   });
+
+  it("should be able to create multiple sibling files while ignorings spaces", () => {
+    const initial = {
+      src: {
+        name: "src",
+        contents: {}
+      }
+    };
+
+    const final = {
+      src: {
+        name: "src",
+        contents: {
+          "index.js": {
+            name: "index.js"
+          },
+          "index.html": {
+            name: "index.html"
+          }
+        }
+      }
+    };
+
+    const updated = terminal(initial).touch("./src/{ index.js , index.html }");
+    expect(updated).toEqual(final);
+  });
 });

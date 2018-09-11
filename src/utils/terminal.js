@@ -53,7 +53,7 @@ const get_file_name = pathToFile => {
 const resolveFileName = fileName => {
   const multipleFileSyntax = fileName.startsWith("{") && fileName.endsWith("}");
   const strippedBraces = fileName.slice(1, -1);
-  const files = strippedBraces.split(",");
+  const files = strippedBraces.split(",").map(f => f.trim());
   const multipleFiles = files.length;
 
   if (multipleFileSyntax) {
