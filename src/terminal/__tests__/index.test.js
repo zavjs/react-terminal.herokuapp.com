@@ -128,4 +128,108 @@ describe("touch command", () => {
     const updated = terminal(initial).touch("./src/{ index.js , index.html }");
     expect(updated).toEqual(final);
   });
+
+  it("should prevent creating files with path white spaces", () => {
+    const initial = {
+      src: {
+        name: "src",
+        contents: {}
+      }
+    };
+
+    const ex1 = terminal(initial).touch("./src /index.js");
+    const msg1 = "src /index.js: no such file or directory";
+
+    expect(ex1).toEqual(msg1);
+  });
+
+  //** new tests */
+
+  it("should ignore peripheral white spaces on file names", () => {
+    const initial = {
+      src: {
+        name: "src",
+        contents: {}
+      }
+    };
+    const ex1 = terminal(initial).touch("./src/ index.js");
+    const res1 = {
+      src: {
+        name: "src",
+        contents: {
+          "index.js": {
+            name: "index.js"
+          }
+        }
+      }
+    };
+
+    expect(ex1).toEqual(res1);
+
+    const ex2 = terminal(initial).touch("./src/ {index.js}");
+
+    expect(ex2).toEqual(res1);
+  });
+
+  it("should be able to create a file in the root level", () => {
+    const initial = {};
+    const res1 = {
+      ab: {
+        name: "ab"
+      }
+    };
+
+    const ex1 = terminal(initial).touch("ab");
+    expect(ex1).toEqual(res1);
+
+    const ex2 = terminal(initial).touch("{ab}");
+    expect(ex2).toEqual(res1);
+  });
+
+  it("should be able to create more than one file in the root level", () => {
+    const initial = {};
+    const res1 = {
+      "ab.html": {
+        name: "ab.html"
+      },
+      "bc.html": {
+        name: "bc.html"
+      }
+    };
+
+    const ex1 = terminal(initial).touch("ab.html bc.html");
+    expect(ex1).toEqual(res1);
+  });
+
+  // it("should create multipe files at once in different folders", () => {
+  //   const initial = {
+  //     src: {
+  //       name: "src",
+  //       contents: {}
+  //     }
+  //   };
+
+  //   const final = {
+  //     src: {
+  //       name: "src",
+  //       contents: {
+  //         "ab.js": {
+  //           name: "ab.js"
+  //         }
+  //       }
+  //     },
+  //     "ab.html": {
+  //       name: "ab.html"
+  //     }
+  //   };
+
+  //   expect(terminal(initial).touch("ab.html ./src/ab.js")).toEqual(final);
+  // });
+
+  /**
+   * what to do when
+   * ./src/ {index.js}
+   * ./src / index.js
+   * ./src/{ index.js, index.html }
+   */
 });

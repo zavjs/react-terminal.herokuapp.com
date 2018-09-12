@@ -47,7 +47,7 @@ const get_file_path = pathToFile => {
  */
 const get_file_name = pathToFile => {
   const fileName = pathToFile.split("/").slice(-1)[0];
-  return resolveFileName(fileName);
+  return resolveFileName(fileName.trim());
 };
 
 const resolveFileName = fileName => {

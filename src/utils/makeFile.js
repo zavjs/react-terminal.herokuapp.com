@@ -11,7 +11,13 @@ const create_files = (source, filesList) => {
 const makeFile = function(tree, parts, file) {
   const obj = Object.assign({}, tree) || {};
   const fullPath = parts.concat(file).join("/");
-  const list = Array.isArray(file) ? file : [].concat(file);
+  const splitted = file.includes(" ") ? file.split(" ") : file;
+  const list = Array.isArray(file) ? file : [].concat(splitted);
+  const noFolders = !parts.length;
+
+  if (noFolders) {
+    return create_files(obj, list);
+  }
 
   if (parts[0]) {
     if (!tree[parts[0]]) {
