@@ -75,10 +75,23 @@ const Input = styled.input`
 const InputLog = styled.span``;
 
 type TerminalPropsT = {
-  lastLogin: string
+  lastLogin: string,
+  machineName: string,
+  username: string,
+  onEnter: Function,
+  commandValue: string,
+  typeCommand: Function
 };
 
-const Terminal = ({ lastLogin }: TerminalPropsT) => (
+const Terminal = ({
+  lastLogin,
+  machineName,
+  username,
+  type,
+  typeCommand,
+  commandValue,
+  onEnter
+}: TerminalPropsT) => (
   <Container>
     <MenuBar>
       <BarOption />
@@ -87,19 +100,21 @@ const Terminal = ({ lastLogin }: TerminalPropsT) => (
     </MenuBar>
     <Content>
       <Line>Last Login: {lastLogin} on Console</Line>
-      <LogLine>
-        Press `a` to run all tests, or run Jest with `--watchAll`
-      </LogLine>
+      <LogLine>Press `help` to see list of available commands</LogLine>
       <InputLine>
-        <InputLog>macbook-pro: ~ zavareze$</InputLog>
-        <Input />
+        <InputLog>
+          {machineName}: ~ {username}$
+        </InputLog>
+        <Input onKeyUp={onEnter} onChange={typeCommand} value={commandValue} />
       </InputLine>
     </Content>
   </Container>
 );
 
 Terminal.defaultProps = {
-  lastLogin: "Sun Sep 2 22:0043"
+  machineName: "computer",
+  lastLogin: "Sun Sep 2 22:0043",
+  username: "zavareze"
 };
 
 export default Terminal;
