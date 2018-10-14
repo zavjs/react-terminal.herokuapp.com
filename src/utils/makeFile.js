@@ -1,3 +1,5 @@
+// @flow
+
 const create_files = (source, filesList) => {
   return filesList.reduce((acc, curr) => {
     return Object.assign({}, acc, {
@@ -8,7 +10,7 @@ const create_files = (source, filesList) => {
   }, source);
 };
 
-const makeFile = function(tree, parts, file) {
+const makeFile = function(tree: Object, parts: Array<string>, file: string) {
   const obj = Object.assign({}, tree) || {};
   const fullPath = parts.concat(file).join("/");
   const splitted = file.includes(" ") ? file.split(" ") : file;

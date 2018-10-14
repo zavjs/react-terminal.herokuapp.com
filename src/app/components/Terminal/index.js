@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import styled from "styled-components";
+import shortid from "shortid";
 
 const Container = styled.div`
   max-width: 100%;
@@ -80,7 +81,8 @@ type TerminalPropsT = {
   username: string,
   onEnter: Function,
   commandValue: string,
-  typeCommand: Function
+  typeCommand: Function,
+  log: Array<string>
 };
 
 const Terminal = ({
@@ -88,6 +90,7 @@ const Terminal = ({
   machineName,
   username,
   type,
+  log,
   typeCommand,
   commandValue,
   onEnter
@@ -101,6 +104,9 @@ const Terminal = ({
     <Content>
       <Line>Last Login: {lastLogin} on Console</Line>
       <LogLine>Press `help` to see list of available commands</LogLine>
+      {log.map(l => (
+        <InputLine key={shortid.generate()}>{l}</InputLine>
+      ))}
       <InputLine>
         <InputLog>
           {machineName}: ~ {username}$
