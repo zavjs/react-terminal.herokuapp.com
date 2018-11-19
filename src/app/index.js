@@ -9,14 +9,16 @@ import "./index.css";
 type AppStateT = {
   line: string,
   tree: Object,
-  log: Array<string>
+  log: Array<string>,
+  lastLogin: string
 };
 
 class App extends React.Component<null, AppStateT> {
   state = {
     tree: {},
     line: "",
-    log: []
+    log: [],
+    lastLogin: ""
   };
 
   typeCommand = (event: any) => {
@@ -24,6 +26,12 @@ class App extends React.Component<null, AppStateT> {
 
     this.setState({
       line: value
+    });
+  };
+
+  componentWillMount = () => {
+    this.setState({
+      lastLogin: new Date().toUTCString()
     });
   };
 
@@ -85,14 +93,13 @@ class App extends React.Component<null, AppStateT> {
   };
 
   render() {
-    const { line } = this.state;
-    const date = new Date().toUTCString();
+    const { line, lastLogin } = this.state;
 
     return (
       <div className="App">
         <Terminal
           log={this.state.log}
-          lastLogin={date}
+          lastLogin={lastLogin}
           typeCommand={this.typeCommand}
           onEnter={this.enterCommand}
           commandValue={line}

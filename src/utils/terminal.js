@@ -8,7 +8,7 @@ const makeTree = require("./makeTree");
  * @param {Array} list of folder names
  * @returns {Array} list of formatted folder names
  */
-const path_resolve = parts => {
+const path_resolve = (parts: Array<string>) => {
   if (parts[0] === "." || parts[0] === "") {
     return parts.slice(1);
   }
