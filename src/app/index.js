@@ -1,17 +1,9 @@
-import * as React from "react";
+import React from "react";
 import Terminal from "./components/Terminal";
 import terminalMod from "../terminal";
-import logo from "./logo.svg";
 import "./index.css";
 
-type AppStateT = {
-  line: string,
-  tree: Object,
-  log: Array<string>,
-  lastLogin: string
-};
-
-class App extends React.Component<null, AppStateT> {
+class App extends React.Component {
   state = {
     tree: {},
     line: "",
@@ -19,7 +11,7 @@ class App extends React.Component<null, AppStateT> {
     lastLogin: ""
   };
 
-  typeCommand = (event: any) => {
+  typeCommand = event => {
     const { value } = event.target;
 
     this.setState({
@@ -33,7 +25,7 @@ class App extends React.Component<null, AppStateT> {
     });
   };
 
-  enterCommand = (event: any) => {
+  enterCommand = event => {
     const { value } = event.target;
     const [command, argument] = value.split(" ");
 
@@ -42,7 +34,7 @@ class App extends React.Component<null, AppStateT> {
     }
   };
 
-  isSpecialCommand = (command: string) => {
+  isSpecialCommand = command => {
     const commands = {
       clear: { execute: this.cleanLog }
     };
@@ -52,7 +44,7 @@ class App extends React.Component<null, AppStateT> {
     return target ? target : null;
   };
 
-  executeCommand = (command: string, argument: string) => {
+  executeCommand = (command, argument) => {
     const { tree } = this.state;
     const operation = terminalMod(tree)[command];
     const specialCommand = this.isSpecialCommand(command);

@@ -73,16 +73,6 @@ const Input = styled.input`
 
 const InputLog = styled.span``;
 
-type TerminalPropsT = {
-  lastLogin: string,
-  machineName: string,
-  username: string,
-  onEnter: Function,
-  commandValue: string,
-  typeCommand: Function,
-  log: Array<string>
-};
-
 const Terminal = ({
   lastLogin,
   machineName,
@@ -92,7 +82,7 @@ const Terminal = ({
   typeCommand,
   commandValue,
   onEnter
-}: TerminalPropsT) => (
+}) => (
   <Container>
     <MenuBar>
       <BarOption />
@@ -118,7 +108,7 @@ const Terminal = ({
 Terminal.defaultProps = {
   machineName: "computer",
   lastLogin: "Sun Sep 2 22:0043",
-  username: "zavareze"
+  username: "User"
 };
 
 export default Terminal;
