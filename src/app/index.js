@@ -2,6 +2,7 @@ import React from "react";
 import Terminal from "./components/Terminal";
 import terminalMod from "../terminal";
 import "./index.css";
+import { consolidateStreamedStyles } from "styled-components";
 
 class App extends React.Component {
   state = {

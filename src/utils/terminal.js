@@ -81,8 +81,7 @@ const create_files = (source, filesList) => {
 const describe_all_commands = table =>
   Object.keys(table)
     .filter(command => !table[command].disabled)
-    .map(command => table[command] && table[command].description)
-    .join(" \n");
+    .map(command => table[command] && `- ${table[command].description}`);
 
 const describe_command = command => command.description;
 

@@ -1,5 +1,7 @@
 ### User Stories, Functionality documentation
 
+- [x] Get available commands with the `help` command. Information about a specific command can be retrieved with `help <command name>`
+
 - [x] When attempting to input an inexisting command, the user should be let known of such, with a "Unknown command: <command>" message
 
 - [x] The user should be able to create files, one or multiple at once with the following syntax: `touch file.ext` or `touch {fileOne.ext,fileTwo.ext,fileThree.ext}`
@@ -7,8 +9,6 @@
 - [x] The user should be able to create folders, one or multiple at once with the following syntax: `mkdir <folder name>` or `mkdir {folderOne,folderTwo,folderThree}`
 
 - [x] The user should be able to list his current folder structure, and all children elements, folders and files within itself with the following syntax: `ls`
-
-- [ ] The user should see a list of all available commands by typing `help`
 
 - [ ] The user should be able to delete files. One or multiple at once. Single files: `rm file.ext`, multiple files `rm {fileOne.ext,fileTwo.ext,fileThree.ext}`
 
