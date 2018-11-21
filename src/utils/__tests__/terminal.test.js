@@ -73,3 +73,23 @@ describe("terminal utils", () => {
     expect(terminal_utils.create_files(initial, input)).toEqual(final);
   });
 });
+
+describe("get_commands_descriptions", () => {
+  it("should be able to convert the commands table into a terminal readable format list", () => {
+    const initial = {
+      myKey: {
+        name: "myKey",
+        description: "myKey: myKey tells you your key"
+      },
+      myName: {
+        name: "myName",
+        description: "myName: myName tells you your name"
+      }
+    };
+
+    const final =
+      "myKey: myKey tells you your key \nmyName: myName tells you your name";
+
+    expect(terminal_utils.define_command_listing(initial)).toEqual(final);
+  });
+});

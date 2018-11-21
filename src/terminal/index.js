@@ -13,7 +13,7 @@ const terminal = tree => {
     }
   };
 
-  const touch = function(fileName) {
+  const touch = fileName => {
     const parts = terminal_utils.get_file_path(fileName);
     const file = terminal_utils.get_file_name(fileName);
     const updatedTree = terminal_utils.makeFile(tree, parts, file);
@@ -21,15 +21,23 @@ const terminal = tree => {
     return handleTerminalResp(updatedTree);
   };
 
-  const mkdir = function(filePath) {
+  const mkdir = filePath => {
     const parts = terminal_utils.get_contents_list(filePath);
     const updatedTree = terminal_utils.makeTree(tree, parts);
     return handleTerminalResp(updatedTree);
   };
 
-  const ls = function() {
+  const ls = () => {
     const keys = tree && Object.keys(tree);
     const output = keys && keys.length ? keys.join(" ") : [""];
+
+    return {
+      output
+    };
+  };
+
+  const help = command => {
+    const output = terminal_utils.define_command_listing(command);
 
     return {
       output
@@ -39,7 +47,8 @@ const terminal = tree => {
   return {
     ls,
     touch,
-    mkdir
+    mkdir,
+    help
   };
 };
 

@@ -1,5 +1,6 @@
 const makeFile = require("./makeFile");
 const makeTree = require("./makeTree");
+const commandsTable = require("./commandsTable");
 
 /**
  * Resolves similar folder structures consistently
@@ -47,10 +48,10 @@ const get_file_path = pathToFile => {
  */
 const get_file_name = pathToFile => {
   const fileName = pathToFile.split("/").slice(-1)[0];
-  return resolveFileName(fileName.trim());
+  return resolve_file_name(fileName.trim());
 };
 
-const resolveFileName = fileName => {
+const resolve_file_name = fileName => {
   const multipleFileSyntax = fileName.startsWith("{") && fileName.endsWith("}");
   const strippedBraces = fileName.slice(1, -1);
   const files = strippedBraces.split(",").map(f => f.trim());
@@ -77,11 +78,30 @@ const create_files = (source, filesList) => {
   }, source);
 };
 
+const describe_all_commands = table =>
+  Object.keys(table)
+    .filter(command => !table[command].disabled)
+    .map(command => table[command] && table[command].description)
+    .join(" \n");
+
+const describe_command = command => command.description;
+
+const get_commands = (scope, table) =>
+  scope === "all"
+    ? describe_all_commands(table)
+    : describe_command(table[scope]);
+
+const define_command_listing = (table, commandName) => {
+  const list = table[commandName] ? commandName : "all";
+  return get_commands(list, table);
+};
+
 module.exports = {
+  create_files,
+  define_command_listing,
   get_file_path,
   get_file_name,
   get_contents_list,
-  create_files,
   makeFile,
   makeTree
 };

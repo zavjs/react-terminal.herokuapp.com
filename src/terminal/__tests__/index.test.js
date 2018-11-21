@@ -6,7 +6,7 @@ describe("touch command", () => {
     const final = "abc/index.js: no such file or directory";
 
     const unexisting = terminal(initial_folder_tree).touch("./abc/index.js")
-      .updated;
+      .output;
     expect(unexisting).toEqual(final);
   });
 
@@ -142,7 +142,7 @@ describe("touch command", () => {
       }
     };
 
-    const ex1 = terminal(initial).touch("./src /index.js").updated;
+    const ex1 = terminal(initial).touch("./src /index.js").output;
     const msg1 = "src /index.js: no such file or directory";
 
     expect(ex1).toEqual(msg1);
