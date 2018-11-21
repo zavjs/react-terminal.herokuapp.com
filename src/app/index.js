@@ -1,5 +1,6 @@
 import React from "react";
 import Terminal from "./components/Terminal";
+import Greeting from "./Greeting";
 import terminalMod from "../terminal";
 import "./index.css";
 import { consolidateStreamedStyles } from "styled-components";
@@ -95,6 +96,7 @@ class App extends React.Component {
           onEnter={this.enterCommand}
           commandValue={line}
         />
+        <Greeting />
       </div>
     );
   }

@@ -11,6 +11,7 @@ const Container = styled.div`
   overflow: scroll;
   border-radius: 6px;
   background-color: rgb(0, 0, 0, 0.75);
+  margin-top: 50px;
 
   @media only screen and (max-width: 640px) {
     width: 100%;
