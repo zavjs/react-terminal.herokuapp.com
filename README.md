@@ -8,5 +8,9 @@
 - Create folders with mkdir command
 
   - `mkdir ./styles`
+  - `mkdir {folderOne,folderTwo,...}`
 
 - List the current directory with `ls`
+  - `ls`
+
+Read `backlog.md` to see all future functionalities.
