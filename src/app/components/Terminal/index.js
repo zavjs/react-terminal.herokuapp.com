@@ -10,6 +10,7 @@ const Container = styled.div`
   max-height: 340px;
   overflow: scroll;
   border-radius: 6px;
+  background-color: #000;
   background-color: rgb(0, 0, 0, 0.75);
   margin-top: 50px;
 
