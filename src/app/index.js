@@ -1,5 +1,3 @@
-// @flow
-
 import * as React from "react";
 import Terminal from "./components/Terminal";
 import terminalMod from "../terminal";

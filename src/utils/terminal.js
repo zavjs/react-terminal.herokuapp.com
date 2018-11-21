@@ -1,5 +1,3 @@
-// @flow
-
 const makeFile = require("./makeFile");
 const makeTree = require("./makeTree");
 
@@ -8,7 +6,7 @@ const makeTree = require("./makeTree");
  * @param {Array} list of folder names
  * @returns {Array} list of formatted folder names
  */
-const path_resolve = (parts: Array<string>) => {
+const path_resolve = parts => {
   if (parts[0] === "." || parts[0] === "") {
     return parts.slice(1);
   }
@@ -27,7 +25,7 @@ const path_resolve = (parts: Array<string>) => {
  * @param {String} folderPath
  * @returns {Array}
  */
-const get_contents_list = (folderPath: string) => {
+const get_contents_list = folderPath => {
   const parts = folderPath.split("/");
   return path_resolve(parts);
 };
@@ -37,7 +35,7 @@ const get_contents_list = (folderPath: string) => {
  * @param {String} pathToFile: path to file
  * @returns {Array} list of folder names
  */
-const get_file_path = (pathToFile: string) => {
+const get_file_path = pathToFile => {
   const parts = get_contents_list(pathToFile);
   return parts.slice(0, parts.length - 1);
 };
@@ -47,7 +45,7 @@ const get_file_path = (pathToFile: string) => {
  * @param {String} pathToFile: path to file
  * @returns {String|Array} file name or list of file names
  */
-const get_file_name = (pathToFile: string) => {
+const get_file_name = pathToFile => {
   const fileName = pathToFile.split("/").slice(-1)[0];
   return resolveFileName(fileName.trim());
 };
@@ -69,7 +67,7 @@ const resolveFileName = fileName => {
   return fileName;
 };
 
-const create_files = (source: Object, filesList: Array<string>) => {
+const create_files = (source, filesList) => {
   return filesList.reduce((acc, curr) => {
     return Object.assign({}, acc, {
       [curr]: {

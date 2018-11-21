@@ -1,11 +1,9 @@
-// @flow
-
 /**
  * Creates object tree from path string
  * @param {Array} parts: list of folder names
  * Does **NOT** create files
  */
-const makeTree = function(tree: Object, parts: Array<string>) {
+const makeTree = function(tree, parts) {
   const obj = Object.assign({}, tree) || {};
 
   if (parts[0] && !tree[parts[0]]) {
