@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   mkdir: {
     name: "mkdir",
     description: "mkdir: create directories using `mkdir <folder name>`"

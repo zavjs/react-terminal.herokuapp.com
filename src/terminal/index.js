@@ -1,4 +1,5 @@
 const terminal_utils = require("../utils/terminal");
+const commandsTable = require("../utils/commandsTable");
 
 const terminal = tree => {
   const handleTerminalResp = response => {
@@ -36,13 +37,9 @@ const terminal = tree => {
     };
   };
 
-  const help = command => {
-    const output = terminal_utils.define_command_listing(command);
-
-    return {
-      output
-    };
-  };
+  const help = command => ({
+    output: terminal_utils.define_command_listing(commandsTable, command)
+  });
 
   return {
     ls,
