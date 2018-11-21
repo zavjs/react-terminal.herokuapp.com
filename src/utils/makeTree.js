@@ -1,9 +1,9 @@
 /**
  * Creates object tree from path string
  * @param {Array} parts: list of folder names
- * @param {String} file: file name
+ * Does **NOT** create files
  */
-const makeTree = function(tree, parts, file) {
+const makeTree = function(tree, parts) {
   const obj = Object.assign({}, tree) || {};
 
   if (parts[0] && !tree[parts[0]]) {

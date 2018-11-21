@@ -1,10 +1,18 @@
 {
   "name": "terminal",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "zavjs",
-  "license": "MIT",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "jest": "^23.5.0"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-scripts": "1.1.5",
+    "shortid": "^2.2.13",
+    "styled-components": "^3.4.9"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
