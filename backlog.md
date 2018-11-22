@@ -21,3 +21,5 @@
 - [ ] The user should be able to configure a new terminal user name by using `config user.name <new user name>` command.
 
 - [ ] The user should see near the terminal a centralized history of all available functionality.
+
+- [ ] The user should easily visualize highlighted text (i.e: commands). The text need to be configurable with interpolation characters.
