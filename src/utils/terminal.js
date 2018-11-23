@@ -1,6 +1,5 @@
 const makeFile = require("./makeFile");
 const makeTree = require("./makeTree");
-const commandsTable = require("./commandsTable");
 
 /**
  * Resolves similar folder structures consistently

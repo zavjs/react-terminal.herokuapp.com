@@ -75,7 +75,7 @@ describe("terminal utils", () => {
 });
 
 describe("get_commands_descriptions", () => {
-  fit("should be able to convert the commands table into a terminal readable format list", () => {
+  it("should be able to convert the commands table into a terminal readable format list", () => {
     const initial = {
       myKey: {
         name: "myKey",
