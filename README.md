@@ -1,3 +1,5 @@
+Find the terminal here: http://react-terminal.herokuapp.com
+
 ## Things the terminal can do:
 
 - Create files with touch command
