@@ -1,6 +1,10 @@
+## React - Linux Terminal (2018)
+
+This is a web app that replicates linux terminal commands.
+
 Find the terminal here: http://react-terminal.herokuapp.com
 
-## Things the terminal can do:
+### Things the terminal can do:
 
 - Create files with touch command
 
